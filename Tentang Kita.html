@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>Asal Muasal</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to right, rgb(255,255,255), rgb(15,82,186));
+            color: #333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to right, rgb(255,255,255), rgb(15,82,186));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        
+        .link a {
+            position: relative;
+            font-size: 1.2rem;
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            transform: 0.3s linear;
+        }
+
+        .nav-container .links a::before{
+            position: absolute;
+            content: "";
+            bottom: -3px;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background-color: rgb(109,67, 0);
+            transition: 0.2s linear;
+        }
+
+        .nav-container .links a:hover::before{
+            width: 100%;
+        }
+        
+        .link a:hover, .link.active a {
+            color: rgb(109,67, 0);
+        }
+        
+        .contact-btn a {
+            background-color: transparent;
+            padding: 5px 20px;
+            border-radius: 20px;
+            border: 2px solid rgb(109,67, 0);
+            transition: 0.2s linear;
+        }
+        
+        .hamburg, .cancel {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        .dropdown {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            transform: translateY(-500px);
+            transition: transform 0.3s;
+            z-index: 1001;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown .links {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .dropdown .cancel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 0 5%;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-section h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: black;
+        }
+        
+        .about-section h1 span {
+            color: white;
+            text-shadow: 0 0 10px rgb(169,169, 169);
+        }
+        
+        .about-content {
+            width: 100%;
+            height: 110%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        
+        .about-image {
+            z-index: -5;
+            width: 45%;
+        }
+        
+        .about-image img {
+            width: 32vw;
+            position: relative;
+            border-radius: 30%;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: black;
+        }
+        
+        .about-text p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+            color: black;
+        }
+        
+        .about-details {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .about-details div {
+            flex: 1;
+        }
+        
+        .about-details p {
+            margin-bottom: 10px;
+        }
+        
+        .about-details span {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        /* Team Section (Tentang Kita) */
+        .team-section {
+            padding: 80px 0;
+            background-color: white;
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .team-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .team-title h1 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+        
+        .team-title h1 span {
+            color: rgb(15,82,186);
+        }
+        
+        .team-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .team-member {
+            background: whitesmoke;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .member-info p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .team-story {
+            background-color: whitesmoke;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 40px;
+        }
+        
+        .team-story h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .team-story p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 32vw) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image, .about-text {
+                flex: none;
+                width: 100%;
+            }
+            
+            .about-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .links {
+                display: none;
+            }
+            
+            .hamburg {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .team-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .about-section h1, .team-title h1 {
+                font-size: 2rem;
+            }
+            
+            .about-text h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .team-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-story {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
+            
+                <!-- Logo bisa ditambahkan di sini -->
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="Homie.html">Homie</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="Asal Muasal.html">Asal Muasal</a></div>
+                <div class="link active" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="#tentang-kita">Tentang Kita</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="Harapan.html">Harapan</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+        <div class="dropdown">
+            <div class="links">
+                <a href="Homie.html">Homie</a>
+                <a href="Asal Muasal.html">Asal Muasal</a>
+                <a href="#tentang-kita" class="active">Tentang Kita</a>
+                <a href="Harapan.html">Harapan</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-container">
+                <h1 data-aos="fade-down">Ada Apa Dengan <span> Kita</span>?</h1>
+                <div class="about-content">
+                    <div class="about-image" data-aos="fade-right">
+                        <img src="Picture1.jpg" alt="Bociww">
+                    </div>
+                    <div class="about-text" data-aos="fade-left">
+                        <h2>Awal Bertemu...</h2>
+                        <p>Pertama kalinya Ndan denger ada nama sepanjang itu dibacain pas pengumuman juara Foundation Study, siapalahh anak ini? Pinternyaaa, kata Ndan. Ternyata anak itu akhirnya jadi teman sekelasnya Ndan waktu G10, anaknya pendiem tapi kalau diajak ngomong nyambung, Ndan suka walaupun agak ketus pertamanya. Terus dengan mengumpulkan keberanian, ajakan itu terlontar, "Nikah yuk?" dan dibalas dingin plus tamparan kehidupan pertama untuk Ndan.</p>
+
+                        <p>Singkat cerita, untuk tahun selanjutnya kita pisah kelas, Ndaa 11 Sci one dan Ndan di 11 Sci 2, tapi kayaknya kehidupan Ndan memang selalu dan akan selalu berhubungan dengan Ndaa, senyuman manis itu datang dan tinggal bertahun-tahun di ingatannya Ndan. Lalu, tiba saat-saat dimana kita harus menentukan titik awal jalan kehidupan, diskusi yang panjang dan berlarut-larut soal memilih tujuan minat untuk kuliah menjadi topik yang seru untuk dibahas, dan disitu Ndan mulai ngerasa nyaman. Ndan mulai perhatiin Ndaa sejak itu, postingan Story Instagramnya yang selalu jadi kabar baik untuk Ndan, "ohh sekarang lagi sibuk inii ternyataa, wohh menang lomba lagii". Dan sampailah di titik dimana Ndan berani untuk utarain tujuan dan perasaan Ndan yang akhirnya dengan segala keputusan bersama membawa kita yang dulu ke kita versi sekarangg... (To be Continued.. Always)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tentang Kita Section -->
+        <section class="team-section" id="tentang-kita">
+            <div class="team-container">
+                <div class="team-title" data-aos="fade-down">
+                    <h1>Our <span>Moments</span></h1>
+                </div>
+                
+                <div class="team-gallery">
+                    <!-- Photo 1 -->
+                    <div class="team-member" data-aos="fade-up" data-aos-delay="100">
+                        <div class="member-image">
+                            <img src="Picture3.jpg" alt="Foto Kita 1">
+                        </div>
+                        <div class="member-info">
+                            <h3>First Date</h3>
+                            <p>Deg-degan ditambah Ndan yang pertama kali jalan berdua sama Ndaa yang cantik angeyy</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Photo 2 -->
+                    <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-image">
+                            <img src="Picture2.jpg" alt="Foto Kita 2">
+                        </div>
+                        <div class="member-info">
+                            <h3>Second Reunion</h3>
+                            <p>Pertemuan kedua kita udah lebih menikmati moment bersama, ngelepasin kangennya, dan nguengg kemana-manaa</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Photo 3 -->
+                    <div class="team-member" data-aos="fade-up" data-aos-delay="300">
+                        <div class="member-image">
+                            <img src="Picture5.jpg" alt="Foto Kita 3">
+                        </div>
+                        <div class="member-info">
+                            <h3>The Third</h3>
+                            <p>Excited bangett, karena kita dah planning kemana-manaa dan Ndan senengg banget liat Ndaa bahagia, walaupun maaf yaa ndaa, sering kejebak macet</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Photo 4 -->
+                    <div class="team-member" data-aos="fade-up" data-aos-delay="400">
+                        <div class="member-image">
+                            <img src="ahaha.jpg" alt="Foto Kita 4">
+                        </div>
+                        <div class="member-info">
+                            <h3>Foto Bociw</h3>
+                            <p>Liatt, ini duluu dua bociw yang keras kepalaa ituu. Sekarang sudah bertumbuh dan semakin bertumbuh untuk menuju ke versi terbaiknya bersamaa</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-story" data-aos="fade-up">
+                    <h2>Next?</h2>
+                    <p>Mungkin selanjutnya foto kita yang entah dimanaa bakal Ndan pajang disinii, mungkin bisaa di gunungg, pantaii, hutann, tapii yang pasti akan ada 1 foto yang paling istimewa Ndan pajang. Yaitu foto Ndan sambil pegang tangan Ayah untuk jemput Ndaa dari keluarga Ndaa</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            offset: 0,
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false
+        });
+        
+        // Mobile menu functions
+        function hamburg(){
+            const navbar = document.querySelector(".dropdown");
+            navbar.style.transform = "translateY(0)";
+        }
+        
+        function cancel(){
+            const navbar = document.querySelector(".dropdown");
+            navbar.style.transform = "translateY(-500px)";
+        }
+        
+        // Close dropdown when clicking on a link
+        document.querySelectorAll('.dropdown a').forEach(link => {
+            link.addEventListener('click', () => {
+                cancel();
+            });
+        });
+        
+        // Background music
+        window.onload = function() {
+            const audio = new Audio('musik/nadhif.mp3');
+            audio.volume = 0.5;
+            
+            // Try to play audio, if blocked, wait for user interaction
+            const playAudio = () => {
+                audio.play().catch(e => {
+                    document.body.addEventListener('click', () => {
+                        audio.play();
+                    }, { once: true });
+                });
+            };
+            
+            // Delay audio start slightly
+            setTimeout(playAudio, 1000);
+        };
+    </script>
+
+<script>
+    // Gunakan link yang sudah dikonversi
+    const audioUrl = 'https://drive.google.com/uc?export=download&id=1Q-nCLZer5tdCtBpNWXUy1422fnebIsTt';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.5;
+      
+      audio.play().catch(e => {
+        // Fallback: Buat tombol play jika autoplay diblokir
+        const playBtn = document.createElement('button');
+        playBtn.innerHTML = '🎵 Putar Musik';
+        playBtn.style.position = 'fixed';
+        playBtn.style.bottom = '20px';
+        playBtn.style.right = '20px';
+        playBtn.style.padding = '10px 15px';
+        playBtn.style.background = '#ff6b6b';
+        playBtn.style.color = 'white';
+        playBtn.style.border = 'none';
+        playBtn.style.borderRadius = '5px';
+        playBtn.style.cursor = 'pointer';
+        playBtn.style.zIndex = '1000';
+        
+        playBtn.onclick = () => {
+          audio.play();
+          playBtn.remove();
+        };
+        
+        document.body.appendChild(playBtn);
+      });
+    });
+    </script>
+
+</body>
+</html>

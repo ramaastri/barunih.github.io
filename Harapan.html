@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>Wishes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="Homie.html">Homie</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="Asal Muasal.html">Asal Muasal</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="Tentang Kita.html">Tentang Kita</a></div>
+                <div class="link active" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="Harapan.html">Harapan</a></div>
+                <div class="link contact-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="https://wa.me/6282252912714?text=Halo%20Ndann%20aku%20Bociww%20%3A)">Ndann dicini!!</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+        <div class="dropdown">
+            <div class="links">
+                <a href="Homie.html">Homie</a>
+                <a href="Asal Muasal.html">Asal Muasal</a>
+                <a href="Tentang Kita.html">Tentang Kita</a>
+                <a href="Harapan.html" class="active">Harapan</a>
+                <a href="https://wa.me/6282252912714?text=Halo%20Ndann%20aku%20Bociww%20Mauu%20Tiumm%203A)">Ndann dicini!!</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="services-section">
+        <div class="services-container">
+            <h1 data-aos="fade-down">My <span>Wishes for you</span></h1>
+            <h2 data-aos="fade-down"><span> </span></h2>
+            <div class="services-content">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-xmark"></i>
+                    <h2>Duniawi</h2>
+                    <p>Semoga segala hal yang diinginkan dapat tercapai yaa, rezekinya dilancarkan, urusannya dipermudah, cita-citanya tercapai, dan semuaa nyaa bisa didapatkann, insyaallah</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-paintbrush"></i>
+                    <h2>Akhirat</h2>
+                    <p>Terus bertumbuh jadi wanita yang sholehah dengan segala prinsip kebaikannya yaa, menjadi contoh yang baik, bukan cuma untuk abang, tapii untuk semua manusia. Tetap jadi pribadi yang rendah hati yaa, ringan tangan untuk bantu orang lainn, dan jadi contoh nantinya untuk dedekk</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <h2>Kita</h2>
+                    <p>Ayoo kita penuhi satu-satu apa yang kita inginkan Ndaa, hubungan kita, rumah dan isinya, list destinasi itu, umroh dan haji, semuaanyaa, dan yang paling penting 3 buah hati yang akan dititipkan semesta ke kitaa</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({offset:0});
+        
+        function hamburg(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(0px)"
+        }
+        
+        function cancel(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(-500px)"
+        }
+    </script>
+
+<script>
+    // Gunakan link yang sudah dikonversi
+    const audioUrl = 'https://drive.google.com/uc?export=download&id=1Q3mhoXgyN3KK8AxgtxOF0dgmCU6bgVCa';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.5;
+      
+      audio.play().catch(e => {
+        // Fallback: Buat tombol play jika autoplay diblokir
+        const playBtn = document.createElement('button');
+        playBtn.innerHTML = '🎵 Putar Musik';
+        playBtn.style.position = 'fixed';
+        playBtn.style.bottom = '20px';
+        playBtn.style.right = '20px';
+        playBtn.style.padding = '10px 15px';
+        playBtn.style.background = '#ff6b6b';
+        playBtn.style.color = 'white';
+        playBtn.style.border = 'none';
+        playBtn.style.borderRadius = '5px';
+        playBtn.style.cursor = 'pointer';
+        playBtn.style.zIndex = '1000';
+        
+        playBtn.onclick = () => {
+          audio.play();
+          playBtn.remove();
+        };
+        
+        document.body.appendChild(playBtn);
+      });
+    });
+    </script>
+
+</body>
+<script>
+    // Mulai saat halaman terbuka
+    window.onload = function() {
+      const audio = new Audio('musik/happy-birthday.mp3');
+      audio.volume = 0.5; // Set volume 50%
+      audio.play().catch(e => {
+        // Jika autoplay diblokir, mulai saat user klik
+        document.body.addEventListener('click', () => audio.play(), { once: true });
+      });
+    };
+  </script>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>DUARRR</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
+                <span>Hewoo Pwincess</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="Homie.html">Homie</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="Asal Muasal.html">Asal Muasal</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="Tentang Kita.html">Tentang Kita</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="Harapan.html">Harapan</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+        <div class="dropdown">
+            <div class="links">
+                <a href="Homie.html">Home</a>
+                <a href="Asal Muasal.html">Asal Muasal</a>
+                <a href="Tentang Kita.html">Tentang Kita</a>
+                <a href="Harapan.html">Harapan</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+<script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for fixed header
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without refreshing
+                if(history.pushState) {
+                    history.pushState(null, null, targetId);
+                } else {
+                    window.location.hash = targetId;
+                }
+            }
+        });
+    });
+
+    // Existing scripts remain unchanged below this point
+    AOS.init({offset:0});
+    
+    function hamburg(){
+        const navbar = document.querySelector(".dropdown")
+        navbar.style.transform = "translateY(0px)"
+    }
+    
+    function cancel(){
+        const navbar = document.querySelector(".dropdown")
+        navbar.style.transform = "translateY(-500px)"
+    }
+
+    // Simple page routing - in a real app you'd use a proper router
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get current page from URL
+        const path = window.location.pathname.split('/').pop() || 'index.html';
+        const pageId = path.replace('.html', '') || 'home';
+        
+        // Hide all pages and show current one
+        document.querySelectorAll('.page-content').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        const currentPage = document.getElementById(pageId);
+        if(currentPage) {
+            currentPage.classList.add('active');
+        } else {
+            document.getElementById('home').classList.add('active');
+        }
+    });
+</script>
+    <!-- Main Content Section - This will change based on the page -->
+    <main id="main-content">
+        <!-- Home Page (index.html) -->
+        <section id="home" class="page-content active">
+            <div class="main-container">
+                <div class="image" data-aos="zoom-in-right" data-aos-duration="2500">
+                    <img src="Picture7.jpg" alt="Bociww's Profile">
+                </div>
+                <div class="content">
+                    <h1 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">Happy B'dayy <span>Bociww</span></h1>
+                    <div class="typewriter" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">Si Paling <span></span></div>
+                    <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">Barakallahu fii umrik Ndaa, Selamat bertambah usiaa, you turn 22 right now, dahh becall uuu tapi masih kicikkk gemeyy, bociww kesayangan Ndann dari dulu sampai infinityy. #Ramaastrii</p>                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({offset:0});
+        
+        function hamburg(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(0px)"
+        }
+        
+        function cancel(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(-500px)"
+        }
+
+        // Simple page routing - in a real app you'd use a proper router
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current page from URL
+            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const pageId = path.replace('.html', '') || 'home';
+            
+            // Hide all pages and show current one
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const currentPage = document.getElementById(pageId);
+            if (currentPage) {
+                currentPage.classList.add('active');
+            } else {
+                document.getElementById('home').classList.add('active');
+            }
+        });
+    </script>
+
+<script>
+    // Gunakan link yang sudah dikonversi
+    const audioUrl = 'https://drive.google.com/uc?export=download&id=1Q3mhoXgyN3KK8AxgtxOF0dgmCU6bgVCa';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.5;
+      
+      audio.play().catch(e => {
+        // Fallback: Buat tombol play jika autoplay diblokir
+        const playBtn = document.createElement('button');
+        playBtn.innerHTML = '🎵 Putar Musik';
+        playBtn.style.position = 'fixed';
+        playBtn.style.bottom = '20px';
+        playBtn.style.right = '20px';
+        playBtn.style.padding = '10px 15px';
+        playBtn.style.background = '#ff6b6b';
+        playBtn.style.color = 'white';
+        playBtn.style.border = 'none';
+        playBtn.style.borderRadius = '5px';
+        playBtn.style.cursor = 'pointer';
+        playBtn.style.zIndex = '1000';
+        
+        playBtn.onclick = () => {
+          audio.play();
+          playBtn.remove();
+        };
+        
+        document.body.appendChild(playBtn);
+      });
+    });
+    </script>
+
+</body>
+<script>
+    // Mulai saat halaman terbuka
+    window.onload = function() {
+      const audio = new Audio('musik/happy-birthday.mp3');
+      audio.volume = 0.5; // Set volume 50%
+      audio.play().catch(e => {
+        // Jika autoplay diblokir, mulai saat user klik
+        document.body.addEventListener('click', () => audio.play(), { once: true });
+      });
+    };
+  </script>
+</html>

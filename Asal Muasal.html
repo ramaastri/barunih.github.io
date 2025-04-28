@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>Asal Muasal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="Homie.html">Homie</a></div>
+                <div class="link active" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="Asal Muasal.html">Asal Muasal</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="Tentang Kita.html">Tentang Kita</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="Harapan.html">Harapan</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+        <div class="dropdown">
+            <div class="links">
+                <a href="Homie.html">Homie</a>
+                <a href="Asal Muasal.html" class="active">Asal Muasal</a>
+                <a href="Tentang Kita.html">Tentang Kita</a>
+                <a href="Harapan.html">Harapan</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-section">
+        <div class="about-container">
+            <h1 data-aos="fade-down">Here's The<span> Sapphire</span></h1>
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <img src="Picture8.jpg" alt="Bociww">
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h2>Asal Usul Bociww Cupcakee</h2>
+                    <p>Namaku Safira, nama panjangnya Safiraaaaaaaaaaaaaaaaaaaa. Aku adalah seorang wanita yang mandiri, keras kepala, cerdas, anggun, cantik, dan berprestasi. Dilahirkan dari pasangan suami istri bernama Bapak Aswadi dan Ibu Tri Mulyani. Dididik dengan baik dan penuh ketegasan, sehingga aku dapat tumbuh menjadi seorang yang luar biasa. Batu itu sekarang benar-benar tumbuh menjadi batu Sapphire yang berkilau, berharga, dan sangat keras. Namun dihadapan seorang Rizky, ia berubah menjadi anak kecil manja yang selalu ingin dimanja sepanjang hidupnya. Dan cuma bersama pria itu ia akan terus menghabiskan sisa hidupnya yang menyenangkan. Dulu mereka hanya teman biasa, namun sekarang, mereka akan menjadi teman hidup. Semoga semuanya dilancarkan ke depannya. Aamiin.</p>
+                    <div class="about-details">
+                        <div>
+                            <p><span>Nama:</span> Safira Astri Atika Zahrani</p>
+                            <p><span>TTL:</span> Palembang, 29 Mei 2003</p>
+                            <p><span>Hobi:</span> Cemill, Bobo, Mamm</p>
+                        </div>
+                        <div>
+                            <p><span>Cita-cita:</span> S2, Dosen, Ibu yang baik</p>
+                            <p><span>Kesukaan:</span> Ndann, buah, Emass</p>
+                            <p><span>Kekurangan:</span> Ga cabalan, mudah ovt (huuuu)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({offset:0});
+        
+        function hamburg(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(0px)"
+        }
+        
+        function cancel(){
+            const navbar = document.querySelector(".dropdown")
+            navbar.style.transform = "translateY(-500px)"
+        }
+    </script>
+
+<script>
+    // Gunakan link yang sudah dikonversi
+    const audioUrl = 'https://drive.google.com/uc?export=download&id=1Q3mhoXgyN3KK8AxgtxOF0dgmCU6bgVCa';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.5;
+      
+      audio.play().catch(e => {
+        // Fallback: Buat tombol play jika autoplay diblokir
+        const playBtn = document.createElement('button');
+        playBtn.innerHTML = '🎵 Putar Musik';
+        playBtn.style.position = 'fixed';
+        playBtn.style.bottom = '20px';
+        playBtn.style.right = '20px';
+        playBtn.style.padding = '10px 15px';
+        playBtn.style.background = '#ff6b6b';
+        playBtn.style.color = 'white';
+        playBtn.style.border = 'none';
+        playBtn.style.borderRadius = '5px';
+        playBtn.style.cursor = 'pointer';
+        playBtn.style.zIndex = '1000';
+        
+        playBtn.onclick = () => {
+          audio.play();
+          playBtn.remove();
+        };
+        
+        document.body.appendChild(playBtn);
+      });
+    });
+    </script>
+
+</body>
+<script>
+    // Mulai saat halaman terbuka
+    window.onload = function() {
+      const audio = new Audio('musik/happy-birthday.mp3');
+      audio.volume = 0.5; // Set volume 50%
+      audio.play().catch(e => {
+        // Jika autoplay diblokir, mulai saat user klik
+        document.body.addEventListener('click', () => audio.play(), { once: true });
+      });
+    };
+  </script>
+</html>
